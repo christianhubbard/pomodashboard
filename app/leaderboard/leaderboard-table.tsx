@@ -32,17 +32,15 @@ export function LeaderboardTable({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="hidden md:table-cell">Username</TableHead>
-              <TableHead className="hidden md:table-cell">Email</TableHead>
-              <TableHead className="hidden md:table-cell">
-                Pomodoros Completed
-              </TableHead>
-              <TableHead></TableHead>
+              <TableHead className="table-cell">Rank</TableHead>
+              <TableHead className="table-cell">Username</TableHead>
+              <TableHead className="table-cell">Email</TableHead>
+              <TableHead className="table-cell">Pomodoros Completed</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.map((user) => (
-              <UserRow key={user.id} user={user} />
+            {users.map((user, idx) => (
+              <UserRow key={user.id} rank={idx + 1} user={user} />
             ))}
           </TableBody>
         </Table>
@@ -60,26 +58,17 @@ export function LeaderboardTable({
   );
 }
 
-function UserRow({ user }: { user: SelectUser }) {
+function UserRow({ user, rank }: { user: SelectUser; rank: number }) {
   const userId = user.id;
   const deleteUserWithId = deleteUser.bind(null, userId);
+  console.log('rank', rank);
 
   return (
     <TableRow>
+      <TableCell className="font-medium pl-8">{rank}</TableCell>
       <TableCell className="font-medium">{user.username}</TableCell>
-      <TableCell className="hidden md:table-cell">{user.email}</TableCell>
+      <TableCell className="table-cell">{user.email}</TableCell>
       <TableCell>{0}</TableCell>
-      <TableCell>
-        <Button
-          className="w-full"
-          size="sm"
-          variant="outline"
-          formAction={deleteUserWithId}
-          disabled
-        >
-          Delete
-        </Button>
-      </TableCell>
     </TableRow>
   );
 }
