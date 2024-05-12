@@ -7,17 +7,19 @@ import { ConfirmationModal } from 'components/ui/ConfirmationModal';
 const PomodoroContainer = ({ user }: { user: any }) => {
   const initialConfig =
     process.env.NODE_ENV === 'production' ? undefined : testConfig;
-  const { state, start, reset, toggle, changeState } =
+  const { state, start, reset, toggle, goPomodoro, goLongBreak, goShortBreak } =
     usePomodoro(initialConfig);
 
   const [currentPomodoro, setCurrentPomodoro] = useState();
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
 
-  const handleOnClick = () => {
+  const handleStartButton = () => {
     if (state.type === 'pomodoro') {
       state.progress > 0
         ? setConfirmationModalOpen(true)
         : handleStartPomodoro();
+    } else if (state.progress === 0) {
+      start();
     } else {
       toggle();
     }
@@ -52,15 +54,36 @@ const PomodoroContainer = ({ user }: { user: any }) => {
       return state.progress > 0 ? 'Pause' : 'Start';
     }
   };
+
   return (
-    <div className="w-full h-full flex flex-col justify-center">
+    <div className="w-full h-full flex flex-col justify-center gap-28">
+      <div className="flex rounded-lg mx-auto">
+        <button
+          className={`text-center text-lg p-4 ${state.type === 'pomodoro' && 'font-bold bg-gray-100'}`}
+          onClick={goPomodoro}
+        >
+          Pomodoro
+        </button>
+        <button
+          className={`text-center text-lg p-4 ${state.type === 'shortBreak' && 'font-bold  bg-gray-100'}`}
+          onClick={goShortBreak}
+        >
+          Short Break
+        </button>
+        <button
+          className={`text-center text-lg p-4 ${state.type === 'longBreak' && 'font-bold  bg-gray-100'}`}
+          onClick={goLongBreak}
+        >
+          Long Break
+        </button>
+      </div>
       <div className="flex p-8 text-6xl font-bold ml-auto mr-auto">
         {state.formattedTimer}
       </div>
       <button
         className="py-2 px-8 font-bold hover:bg-gray-100 border mr-auto ml-auto rounded"
         type="button"
-        onClick={handleOnClick}
+        onClick={handleStartButton}
       >
         {getButtonText()}
       </button>
