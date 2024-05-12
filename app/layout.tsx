@@ -29,14 +29,18 @@ export default function RootLayout({
                   href="/"
                 >
                   <Logo />
-                  <span className="">ACME</span>
+                  <span className="">PomoDashboard</span>
                 </Link>
               </div>
               <div className="flex-1 overflow-auto py-2">
                 <nav className="grid items-start px-4 text-sm font-medium">
                   <NavItem href="/">
                     <UsersIcon className="h-4 w-4" />
-                    Users
+                    Dashboard
+                  </NavItem>
+                  <NavItem href="/leaderboard">
+                    <UsersIcon className="h-4 w-4" />
+                    Leaderboard
                   </NavItem>
                   <NavItem href="/settings">
                     <SettingsIcon className="h-4 w-4" />
