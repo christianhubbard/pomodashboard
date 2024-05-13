@@ -33,7 +33,7 @@ export function LeaderboardTable({
           <TableHeader>
             <TableRow>
               <TableHead className="table-cell">Rank</TableHead>
-              <TableHead className="table-cell">Username</TableHead>
+              <TableHead className="table-cell">Name</TableHead>
               <TableHead className="table-cell">Email</TableHead>
               <TableHead className="table-cell">Pomodoros Completed</TableHead>
             </TableRow>
@@ -66,9 +66,9 @@ function UserRow({ user, rank }: { user: SelectUser; rank: number }) {
   return (
     <TableRow>
       <TableCell className="font-medium pl-8">{rank}</TableCell>
-      <TableCell className="font-medium">{user.username}</TableCell>
+      <TableCell className="font-medium">{user.name}</TableCell>
       <TableCell className="table-cell">{user.email}</TableCell>
-      <TableCell>{0}</TableCell>
+      <TableCell>{user.completed_pomodoros}</TableCell>
     </TableRow>
   );
 }

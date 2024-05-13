@@ -1,15 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
-import { usePomodoro, testConfig } from 'utils/usePomodoro';
+import React, { useState, useEffect } from 'react';
+import { usePomodoro, testConfig, defaultConfig } from 'utils/usePomodoro';
 import { ConfirmationModal } from 'components/ui/ConfirmationModal';
+import { completePomodoroAction } from './actions';
 
 const PomodoroContainer = ({ user }: { user: any }) => {
   const initialConfig =
-    process.env.NODE_ENV === 'production' ? undefined : testConfig;
+    process.env.NODE_ENV === 'production'
+      ? { pomodoros: user.pomodoros, ...defaultConfig }
+      : testConfig;
   const { state, start, reset, toggle, goPomodoro, goLongBreak, goShortBreak } =
     usePomodoro(initialConfig);
 
+  const [completedPomodoros, setCompletedPomodoros] = useState(
+    user.pomodoros || 0
+  );
   const [currentPomodoro, setCurrentPomodoro] = useState();
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
 
@@ -46,6 +52,16 @@ const PomodoroContainer = ({ user }: { user: any }) => {
     setConfirmationModalOpen(false);
     reset();
   };
+
+  useEffect(() => {
+    const handleCompletePomodoro = async () => {
+      if (state.pomodoros > completedPomodoros) {
+        completePomodoroAction(user.email);
+        setCompletedPomodoros(state.pomodoros);
+      }
+    };
+    handleCompletePomodoro();
+  }, [state.pomodoros]);
 
   const getButtonText = () => {
     if (state.type === 'pomodoro') {
