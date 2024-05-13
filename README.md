@@ -2,6 +2,9 @@
 
 https://pomodashboard.vercel.app/
 
+<img width="756" alt="Screenshot 2024-05-13 at 4 16 50 PM" src="https://github.com/christianhubbard/pomodashboard/assets/59040087/f49e71fe-963d-47eb-9ee8-660e2a803639">
+
+
 ## Goal
 
 The internet is full of client-side pomodoro applications, but very few allow a user to create an account and track their progress over time.
@@ -10,21 +13,48 @@ Vercel's storage solutions allow for creating a feature-rich pomodoro applicatio
 
 PomoDashboard offers a persistent pomodoro timer that syncs across browsers and devices, while also allowing users the ability to gamify their productivity by increasing their ranking on the leaderboard.
 
-## Key Features
 
----
+
+## Key Features
 
 #### Persistent Timers
 
-We leverage Vercel KV to keep a temporary store of your current timer on the edge. Because the timer's history is not stored on the client, reloading the page or navigating to the leaderboard won't reset your progress on your current timer. If you start a timer in one browser, you could close and open in another browser. This is particularly useful for users that use multiple computers.
+We leverage Vercel KV to keep a temporary store of your current timer on the edge. Because the timer's history is not stored on the client, reloading the page or navigating to the leaderboard won't reset your progress on your current timer. If you start a timer in one browser, you can close and open it in another browser. This is particularly useful for users who use multiple computers.
+
+<img width="613" alt="Screenshot 2024-05-13 at 4 43 09 PM" src="https://github.com/christianhubbard/pomodashboard/assets/59040087/d8bccd55-5fa8-41e2-b551-7f8b787a7a2b">
+
 
 #### Pomodoro Tracking
 
-Vercel's Postgres database allows us keep an intricate log of all pomodoros completed. In the future, we can use this information to show a user's progress over time, but we're currently using it to power our leaderboard. The leaderboard ranks the users by the number of pomodoros they've completed and is updated in real time.
+Vercel's Postgres database allows us to keep an intricate log of all pomodoros completed. In the future, we can use this information to show a user's progress over time, but we're currently using it to power our leaderboard. The leaderboard ranks the users by the number of pomodoros they've completed and is updated in real-time.
+
+<img width="1012" alt="Screenshot 2024-05-13 at 4 43 51 PM" src="https://github.com/christianhubbard/pomodashboard/assets/59040087/95bc4067-07fb-4e73-a166-b467a49fe06b">
+
 
 #### Automatic Auth Integration
 
-When a user signs up with our Github OAuth integration, we also automatically create an entry for them in our Database. This ensures that our application data stays in sync with our authentication records, and allows users to begin tracking their pomodoros immediately after signing up.
+When a user signs up with our Github OAuth integration, we automatically create an entry for them in our Database. This ensures that our application data stays in sync with our authentication records, and allows users to begin tracking their pomodoros immediately after signing up. This is handled with ease thanks to the close integration of Neon, Drizzle, and NextAuth.
+
+```
+import NextAuth from 'next-auth';
+import { Adapter } from 'next-auth/adapters';
+import GitHub from 'next-auth/providers/github';
+import { DrizzleAdapter } from '@auth/drizzle-adapter';
+import { db } from './db';
+
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut
+} = NextAuth({
+  session: { strategy: 'jwt' },
+  adapter: DrizzleAdapter(db) as Adapter,
+  providers: [GitHub],
+});
+```
+
+
 
 ## Technical Overview
 
