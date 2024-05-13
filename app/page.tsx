@@ -1,4 +1,3 @@
-import { getUsers } from '@/lib/db';
 import { auth } from '@/lib/auth';
 
 import { PomodoroContainer } from './PomodoroContainer';

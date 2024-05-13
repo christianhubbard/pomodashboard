@@ -1,6 +1,5 @@
-import { getUsers } from '@/lib/db';
+import { getUsers, getPomodoros } from '@/lib/db';
 import { LeaderboardTable } from './leaderboard-table';
-import { Search } from '../search';
 
 export default async function IndexPage({
   searchParams
@@ -10,6 +9,9 @@ export default async function IndexPage({
   const search = searchParams.q ?? '';
   const offset = searchParams.offset ?? 0;
   const { users, newOffset } = await getUsers(search, Number(offset));
+  const data = getPomodoros();
+
+  console.log('data', data);
 
   return (
     <main className="flex flex-1 flex-col p-4 md:p-6">
