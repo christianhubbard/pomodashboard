@@ -61,7 +61,6 @@ export function LeaderboardTable({
 function UserRow({ user, rank }: { user: SelectUser; rank: number }) {
   const userId = user.id;
   const deleteUserWithId = deleteUser.bind(null, userId);
-  console.log('rank', rank);
 
   return (
     <TableRow>

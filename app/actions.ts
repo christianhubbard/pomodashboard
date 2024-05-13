@@ -20,7 +20,6 @@ export async function startPomodoroAction(
 
 export async function checkCurrentPomodoro(email: string) {
   const current_pomodoro = await kv.hget(email, 'current_pomodoro');
-  console.log('current_pomodoro response', current_pomodoro);
   return { current_pomodoro };
 }
 

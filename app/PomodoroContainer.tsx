@@ -57,8 +57,6 @@ const PomodoroContainer = ({
 
   const handleStartPomodoro = async () => {
     const now = new Date();
-    // optionally add .toISOString(); if needed
-    console.log('now', now);
     // Start the server timer
     startPomodoroAction(user.email, { current_pomodoro: now });
     // Start the local timer
