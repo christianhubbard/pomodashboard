@@ -14,7 +14,7 @@ export async function startPomodoroAction(
   email: string,
   { current_pomodoro }: { current_pomodoro: any }
 ) {
-  kv.hset(email, { current_pomodoro });
+  await kv.hset(email, { current_pomodoro });
   revalidatePath('/');
 }
 
@@ -30,5 +30,5 @@ export async function resetCurrentPomodoroAction(email: string) {
 }
 
 export async function completePomodoroAction(email: string) {
-  completePomodoro(email);
+  await completePomodoro(email);
 }
