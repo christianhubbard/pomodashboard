@@ -1,22 +1,46 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { usePomodoro, testConfig, defaultConfig } from 'utils/usePomodoro';
 import { ConfirmationModal } from 'components/ui/ConfirmationModal';
-import { completePomodoroAction } from './actions';
+import {
+  completePomodoroAction,
+  startPomodoroAction,
+  resetCurrentPomodoroAction
+} from './actions';
 
-const PomodoroContainer = ({ user }: { user: any }) => {
+export const fetchCache = 'force-no-store';
+
+const PomodoroContainer = ({
+  user,
+  current_pomodoro
+}: {
+  user: any;
+  current_pomodoro: any;
+}) => {
   const initialConfig =
     process.env.NODE_ENV === 'production'
       ? { pomodoros: user.pomodoros, ...defaultConfig }
       : testConfig;
-  const { state, start, reset, toggle, goPomodoro, goLongBreak, goShortBreak } =
-    usePomodoro(initialConfig);
+
+  const {
+    state,
+    start,
+    reset,
+    toggle,
+    goPomodoro,
+    goLongBreak,
+    goShortBreak,
+    changeState
+  } = usePomodoro(initialConfig);
 
   const [completedPomodoros, setCompletedPomodoros] = useState(
     user.pomodoros || 0
   );
-  const [currentPomodoro, setCurrentPomodoro] = useState();
+  const [currentPomodoro, setCurrentPomodoro] = useState(!!current_pomodoro);
+  const [cancelPromptAction, setCancelPromptAction] = useState<
+    'shortBreak' | 'longBreak' | ''
+  >('');
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
 
   const handleStartButton = () => {
@@ -32,24 +56,22 @@ const PomodoroContainer = ({ user }: { user: any }) => {
   };
 
   const handleStartPomodoro = async () => {
+    const now = new Date();
+    // optionally add .toISOString(); if needed
+    console.log('now', now);
     // Start the server timer
-    // const newPomodoro = await startPomodoro(user!);
-    // if (newPomodoro === null) {
-    //   //unable to start a timer, fire modal.
-    //   window.alert(
-    //     'unable to start a timer, please refresh the window and try again'
-    //   );
-    // } else {
-    // Start the client timer
+    startPomodoroAction(user.email, { current_pomodoro: now });
+    // Start the local timer
     start();
-    // setCurrentPomodoro(newPomodoro);
-    // }
+    // Set currentPomo to true
+    setCurrentPomodoro(true);
   };
 
   const handleCancelPomodoro = async () => {
     // Cancel the pomo on the server
-    // await cancelPomodoro(user!, currentPomodoro?.id!);
     setConfirmationModalOpen(false);
+    resetCurrentPomodoroAction(user.email);
+    setCurrentPomodoro(false);
     reset();
   };
 
@@ -57,11 +79,44 @@ const PomodoroContainer = ({ user }: { user: any }) => {
     const handleCompletePomodoro = async () => {
       if (state.pomodoros > completedPomodoros) {
         completePomodoroAction(user.email);
+        setCurrentPomodoro(false);
         setCompletedPomodoros(state.pomodoros);
       }
     };
     handleCompletePomodoro();
   }, [state.pomodoros]);
+
+  useEffect(() => {
+    if (current_pomodoro) {
+      // Check if pomodoro was started in the last 25 minutes
+      const pomodoroStartDate = new Date(current_pomodoro);
+      const twentyFiveMinutesInMS = 25 * 60 * 1000;
+      const fiveSecondsInMS = 5 * 1000;
+      const timeDelay =
+        process.env.NODE_ENV === 'production'
+          ? twentyFiveMinutesInMS
+          : fiveSecondsInMS;
+      const twentyFiveMinutesAgo = new Date();
+      twentyFiveMinutesAgo.setTime(twentyFiveMinutesAgo.getTime() - timeDelay);
+      if (pomodoroStartDate.getDate() == twentyFiveMinutesAgo.getDate()) {
+        if (pomodoroStartDate > twentyFiveMinutesAgo) {
+          // greater number means more recent
+          const timeDiffInSeconds = Math.floor(
+            (pomodoroStartDate.getTime() - twentyFiveMinutesAgo.getTime()) /
+              1000
+          );
+          changeState({
+            timer: timeDiffInSeconds,
+            paused: false
+          });
+        } else {
+          resetCurrentPomodoroAction(user.email);
+        }
+      } else {
+        resetCurrentPomodoroAction(user.email);
+      }
+    }
+  }, [current_pomodoro]);
 
   const getButtonText = () => {
     if (state.type === 'pomodoro') {
@@ -76,19 +131,40 @@ const PomodoroContainer = ({ user }: { user: any }) => {
       <div className="flex rounded-lg mx-auto">
         <button
           className={`text-center text-lg p-4 ${state.type === 'pomodoro' && 'font-bold bg-gray-100'}`}
-          onClick={goPomodoro}
+          onClick={() => {
+            setCancelPromptAction('');
+            if (state.type !== 'pomodoro') {
+              goPomodoro();
+            }
+          }}
         >
           Pomodoro
         </button>
         <button
           className={`text-center text-lg p-4 ${state.type === 'shortBreak' && 'font-bold  bg-gray-100'}`}
-          onClick={goShortBreak}
+          onClick={() => {
+            if (currentPomodoro) {
+              setConfirmationModalOpen(true);
+              setCancelPromptAction('shortBreak');
+            } else {
+              setCancelPromptAction('');
+              goShortBreak();
+            }
+          }}
         >
           Short Break
         </button>
         <button
           className={`text-center text-lg p-4 ${state.type === 'longBreak' && 'font-bold  bg-gray-100'}`}
-          onClick={goLongBreak}
+          onClick={() => {
+            if (currentPomodoro) {
+              setConfirmationModalOpen(true);
+              setCancelPromptAction('longBreak');
+            } else {
+              setCancelPromptAction('');
+              goLongBreak();
+            }
+          }}
         >
           Long Break
         </button>
@@ -124,7 +200,17 @@ const PomodoroContainer = ({ user }: { user: any }) => {
               <button
                 className="py-2 px-8 font-bold hover:bg-gray-100 border rounded"
                 type="button"
-                onClick={() => handleCancelPomodoro()}
+                onClick={() => {
+                  handleCancelPomodoro();
+                  if (cancelPromptAction === 'shortBreak') {
+                    resetCurrentPomodoroAction(user.email);
+                    goShortBreak();
+                  } else if (cancelPromptAction === 'longBreak') {
+                    resetCurrentPomodoroAction(user.email);
+                    goLongBreak();
+                  }
+                  setCancelPromptAction('');
+                }}
               >
                 Cancel Pomodoro
               </button>
