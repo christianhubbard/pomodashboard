@@ -127,7 +127,7 @@ const PomodoroContainer = ({
   };
 
   return (
-    <div className="w-full h-full flex flex-col justify-center gap-28">
+    <div className="w-full h-5/6 flex flex-col justify-center gap-16">
       <div className="flex rounded-lg mx-auto">
         <button
           className={`text-center text-lg p-4 ${state.type === 'pomodoro' && 'font-bold bg-gray-100'}`}
