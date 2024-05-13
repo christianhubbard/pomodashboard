@@ -11,7 +11,7 @@ export default async function IndexPage() {
   const { current_pomodoro } = await checkCurrentPomodoro(user?.email || '');
 
   return (
-    <main className="flex flex-1 flex-col p-4 md:p-6">
+    <main className="flex flex-1 flex-col py-4 sm:p-4 md:p-6">
       {user ? (
         <PomodoroContainer user={user} current_pomodoro={current_pomodoro} />
       ) : (

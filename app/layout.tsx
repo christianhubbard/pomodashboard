@@ -24,8 +24,8 @@ export default async function RootLayout({
   const user = session?.user;
 
   return (
-    <html lang="en" className="h-full bg-gray-50">
-      <body>
+    <html lang="en" className="h-full bg-gray-50 w-full ">
+      <body className="max-w-full">
         {user ? (
           <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
             <div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">

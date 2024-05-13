@@ -12,7 +12,7 @@ export default async function IndexPage({
   const { users, newOffset } = await getUsers(search, Number(offset));
 
   return (
-    <main className="flex flex-1 flex-col p-4 md:p-6">
+    <main className="flex flex-1 flex-col p-4 md:p-6 w-full">
       <div className="flex items-center mb-8">
         <h1 className="font-semibold text-lg md:text-2xl">Leaderboard</h1>
       </div>
