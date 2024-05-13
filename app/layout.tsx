@@ -3,11 +3,11 @@ import './globals.css';
 import Link from 'next/link';
 import { auth } from '@/lib/auth';
 import { Analytics } from '@vercel/analytics/react';
-import { Logo, SettingsIcon, UsersIcon, VercelLogo } from '@/components/icons';
+import { Logo, SettingsIcon, UsersIcon } from '@/components/icons';
 import { FaRegClock } from 'react-icons/fa6';
-
 import { User } from './user';
 import { NavItem } from './nav-item';
+import MobileNavigationButton from '@/components/MobileNavigationButton';
 
 export const metadata = {
   title: 'PomoDashboard',
@@ -59,13 +59,7 @@ export default async function RootLayout({
             </div>
             <div className="flex flex-col">
               <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40 justify-between lg:justify-end">
-                <Link
-                  className="flex items-center gap-2 font-semibold lg:hidden"
-                  href="/"
-                >
-                  <Logo />
-                  <span className="">PomoDashboard</span>
-                </Link>
+                <MobileNavigationButton />
                 <User />
               </header>
               {children}

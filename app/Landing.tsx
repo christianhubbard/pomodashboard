@@ -7,11 +7,11 @@ import { Button } from '../components/ui/button';
 const Landing = () => {
   return (
     <div className="flex flex-col items-center text-center">
-      <div className="text-xl pt-32 text-gray-500">
+      <div className="text-md md:text-xl pt-32 text-gray-500">
         Stay Productive, Compete with Friends!
       </div>
-      <div className="text-8xl p-8">PomoDashboard</div>
-      <div className="w-1/2 p-4 mx-auto">
+      <div className="text-6xl md:text-8xl p-8">PomoDashboard</div>
+      <div className="w-11/12 sm:w-9/12 lg:w-1/2 p-4 mx-auto">
         Using the proven Pomodoro technique, PomoDashboard helps you focus
         deeper, minimize distractions, and get more done in less time.
       </div>
