@@ -5,6 +5,7 @@ import { auth } from '@/lib/auth';
 import { Analytics } from '@vercel/analytics/react';
 import { Logo, SettingsIcon, UsersIcon } from '@/components/icons';
 import { FaRegClock } from 'react-icons/fa6';
+import { GiTomato } from 'react-icons/gi';
 import { User } from './user';
 import { NavItem } from './nav-item';
 import MobileNavigationButton from '@/components/MobileNavigationButton';
@@ -35,7 +36,7 @@ export default async function RootLayout({
                     className="flex items-center gap-2 font-semibold"
                     href="/"
                   >
-                    <Logo />
+                    <GiTomato />
                     <span className="">PomoDashboard</span>
                   </Link>
                 </div>
@@ -49,10 +50,10 @@ export default async function RootLayout({
                       <UsersIcon className="h-4 w-4" />
                       Leaderboard
                     </NavItem>
-                    <NavItem href="/settings">
+                    {/* <NavItem href="/settings">
                       <SettingsIcon className="h-4 w-4" />
                       Settings
-                    </NavItem>
+                    </NavItem> */}
                   </nav>
                 </div>
               </div>
@@ -73,7 +74,7 @@ export default async function RootLayout({
                   className="flex items-center gap-2 font-semibold"
                   href="/"
                 >
-                  <Logo />
+                  <GiTomato />
                   <span className="">PomoDashboard</span>
                 </Link>
               </div>
