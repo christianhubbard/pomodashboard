@@ -51,7 +51,7 @@ export const {
 
 ## Technical Overview
 
-This is a starter template using the following stack:
+This project is using the following stack:
 
 - Framework - [Next.js 14](https://nextjs.org/)
 - Language - [TypeScript](https://www.typescriptlang.org)
@@ -64,7 +64,7 @@ This is a starter template using the following stack:
 - Analytics - [Vercel Analytics](https://vercel.com/analytics)
 - Formatting - [Prettier](https://prettier.io)
 
-This template uses the new Next.js App Router. This includes support for enhanced layouts, colocation of components, tests, and styles, component-level data fetching, and more.
+This application uses the new Next.js App Router. This includes support for enhanced layouts, colocation of components, tests, and styles, component-level data fetching, and more.
 
 ## Getting Started
 
