@@ -32,11 +32,11 @@ const Landing = () => {
           Features
         </div>
         <div className="flex flex-col md:flex-row py-4 md:py-12 items-center justify-around  w-full xl:w-10/12 mx-auto">
-          <div className="invisible md:visible w-96 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
+          <div className="hidden md:block w-96 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
             <Image
               alt="NextAuth Logo"
               src="/images/next-auth.jpg"
-              className="object-contain "
+              className="object-contain"
               layout="fill"
             />
           </div>
@@ -52,11 +52,11 @@ const Landing = () => {
               pomodoros immediately after signing up.
             </div>
           </div>
-          <div className="visible md:invisible w-96 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
+          <div className="block md:hidden w-96 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
             <Image
               alt="NextAuth Logo"
               src="/images/next-auth.jpg"
-              className="object-contain "
+              className="object-contain"
               layout="fill"
             />
           </div>
@@ -77,17 +77,17 @@ const Landing = () => {
             <Image
               alt="timer in progress"
               src="/images/timers.png"
-              className="object-cover "
+              className="object-cover"
               layout="fill"
             />
           </div>
         </div>
         <div className="flex flex-col md:flex-row py-4 md:py-12 items-center justify-around  w-full xl:w-10/12 mx-auto">
-          <div className="invisible md:visible w-96 md:w-1/2 lg:w-1/2 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
+          <div className="hidden md:block w-96 md:w-1/2 lg:w-1/2 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
             <Image
               alt="table of users sorted by pomodoros completed"
               src="/images/leaderboard.png"
-              className="object-contain "
+              className="object-contain"
               layout="fill"
             />
           </div>
@@ -101,11 +101,11 @@ const Landing = () => {
               number of pomodoros they've completed and is updated in real-time.
             </div>
           </div>
-          <div className="visible md:invisible w-10/12 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
+          <div className="block md:hidden w-10/12 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
             <Image
               alt="table of users sorted by pomodoros completed"
               src="/images/leaderboard.png"
-              className="object-contain "
+              className="object-contain"
               layout="fill"
             />
           </div>
