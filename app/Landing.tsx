@@ -32,7 +32,7 @@ const Landing = () => {
           Features
         </div>
         <div className="flex flex-col md:flex-row py-4 md:py-12 items-center justify-around  w-full xl:w-10/12 mx-auto">
-          <div className="hidden md:block w-96 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
+          <div className="relative w-96 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
             <Image
               alt="NextAuth Logo"
               src="/images/next-auth.jpg"
@@ -52,16 +52,8 @@ const Landing = () => {
               pomodoros immediately after signing up.
             </div>
           </div>
-          <div className="block md:hidden w-96 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
-            <Image
-              alt="NextAuth Logo"
-              src="/images/next-auth.jpg"
-              className="object-contain"
-              layout="fill"
-            />
-          </div>
         </div>
-        <div className="flex flex-col md:flex-row py-4 md:py-12 items-center justify-around w-full xl:w-10/12 mx-auto">
+        <div className="flex flex-col-reverse md:flex-row py-4 md:py-12 items-center justify-around w-full xl:w-10/12 mx-auto">
           <div className="w-10/12 sm:w-9/12 md:w-5/12 py-4 sm:py-6">
             <div className="py-4 text-xl font-medium md:font-normal sm:text-2xl md:text-4xl">
               Persistent Timer
@@ -83,7 +75,7 @@ const Landing = () => {
           </div>
         </div>
         <div className="flex flex-col md:flex-row py-4 md:py-12 items-center justify-around  w-full xl:w-10/12 mx-auto">
-          <div className="hidden md:block w-96 md:w-1/2 lg:w-1/2 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
+          <div className="relative w-96 md:w-1/2 lg:w-1/2 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
             <Image
               alt="table of users sorted by pomodoros completed"
               src="/images/leaderboard.png"
@@ -100,14 +92,6 @@ const Landing = () => {
               all pomodoros completed. The leaderboard ranks the users by the
               number of pomodoros they've completed and is updated in real-time.
             </div>
-          </div>
-          <div className="block md:hidden w-10/12 h-72 overflow-hidden drop-shadow py-4 sm:py-8">
-            <Image
-              alt="table of users sorted by pomodoros completed"
-              src="/images/leaderboard.png"
-              className="object-contain"
-              layout="fill"
-            />
           </div>
         </div>
       </div>
