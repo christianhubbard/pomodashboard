@@ -2,8 +2,7 @@
 
 https://pomodashboard.vercel.app/
 
-<img width="756" alt="Screenshot 2024-05-13 at 4 16 50 PM" src="https://github.com/christianhubbard/pomodashboard/assets/59040087/f49e71fe-963d-47eb-9ee8-660e2a803639">
-
+<div align="center"><img width="756" alt="Screenshot 2024-05-13 at 4 16 50 PM" src="https://github.com/christianhubbard/pomodashboard/assets/59040087/f49e71fe-963d-47eb-9ee8-660e2a803639"></div>
 
 ## Goal
 
@@ -13,23 +12,19 @@ Vercel's storage solutions allow for creating a feature-rich pomodoro applicatio
 
 PomoDashboard offers a persistent pomodoro timer that syncs across browsers and devices, while also allowing users the ability to gamify their productivity by increasing their ranking on the leaderboard.
 
-
-
 ## Key Features
 
 #### Persistent Timers
 
 We leverage Vercel KV to keep a temporary store of your current timer on the edge. Because the timer's history is not stored on the client, reloading the page or navigating to the leaderboard won't reset your progress on your current timer. If you start a timer in one browser, you can close and open it in another browser. This is particularly useful for users who use multiple computers.
 
-<img width="613" alt="Screenshot 2024-05-13 at 4 43 09 PM" src="https://github.com/christianhubbard/pomodashboard/assets/59040087/d8bccd55-5fa8-41e2-b551-7f8b787a7a2b">
-
+<div align="center"><img width="613" alt="Screenshot 2024-05-13 at 4 43 09 PM" src="https://github.com/christianhubbard/pomodashboard/assets/59040087/d8bccd55-5fa8-41e2-b551-7f8b787a7a2b"></div>
 
 #### Pomodoro Tracking
 
 Vercel's Postgres database allows us to keep an intricate log of all pomodoros completed. In the future, we can use this information to show a user's progress over time, but we're currently using it to power our leaderboard. The leaderboard ranks the users by the number of pomodoros they've completed and is updated in real-time.
 
-<img width="1012" alt="Screenshot 2024-05-13 at 4 43 51 PM" src="https://github.com/christianhubbard/pomodashboard/assets/59040087/95bc4067-07fb-4e73-a166-b467a49fe06b">
-
+<div align="center"><img width="1012" alt="Screenshot 2024-05-13 at 4 43 51 PM" src="https://github.com/christianhubbard/pomodashboard/assets/59040087/95bc4067-07fb-4e73-a166-b467a49fe06b"></div>
 
 #### Automatic Auth Integration
 
@@ -53,8 +48,6 @@ export const {
   providers: [GitHub],
 });
 ```
-
-
 
 ## Technical Overview
 
