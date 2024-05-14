@@ -28,7 +28,7 @@ const Landing = () => {
         </Link>
       </div>
       <div className="py-32">
-        <div className="text-3xl sm:text-4xl md:text-6xl py-6 md:py-8">
+        <div className="text-3xl sm:text-5xl md:text-6xl py-6 md:py-8">
           Features
         </div>
         <div className="flex flex-col md:flex-row py-4 md:py-12 items-center justify-around  w-full xl:w-10/12 mx-auto">
@@ -41,7 +41,7 @@ const Landing = () => {
             />
           </div>
           <div className="w-10/12 sm:w-9/12 md:w-5/12 py-4 sm:py-6">
-            <div className="py-4 text-xl sm:text-2xl md:text-4xl">
+            <div className="py-4 font-medium md:font-normal text-xl sm:text-2xl md:text-4xl">
               OAuth Registration
             </div>
             <div className="py-4 sm:py-6">
@@ -63,7 +63,7 @@ const Landing = () => {
         </div>
         <div className="flex flex-col md:flex-row py-4 md:py-12 items-center justify-around w-full xl:w-10/12 mx-auto">
           <div className="w-10/12 sm:w-9/12 md:w-5/12 py-4 sm:py-6">
-            <div className="py-8 text-xl sm:text-2xl md:text-4xl">
+            <div className="py-4 text-xl font-medium md:font-normal sm:text-2xl md:text-4xl">
               Persistent Timer
             </div>
             <div className="py-4 sm:py-6">
@@ -92,7 +92,7 @@ const Landing = () => {
             />
           </div>
           <div className="w-10/12 sm:w-9/12 md:w-5/12 py-4 sm:py-6">
-            <div className="py-4 text-xl sm:text-2xl md:text-4xl">
+            <div className="py-4 text-xl font-medium md:font-normal sm:text-2xl md:text-4xl">
               Pomodoro Leaderboards
             </div>
             <div className="py-4 sm:py-6">
