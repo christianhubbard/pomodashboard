@@ -9,7 +9,7 @@ const Landing = () => {
   return (
     <div className="flex flex-col items-center text-center w-full max-w-full">
       <div className="text-sm md:text-xl pt-32 text-gray-500">
-        Stay Productive, Compete with Friends!
+        Compete with Friends, Stay Productive!
       </div>
       <div className="text-4xl sm:text-6xl md:text-8xl py-6 md:py-8">
         PomoDashboard
