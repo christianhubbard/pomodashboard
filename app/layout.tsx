@@ -3,6 +3,7 @@ import './globals.css';
 import Link from 'next/link';
 import { auth } from '@/lib/auth';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Logo, SettingsIcon, UsersIcon } from '@/components/icons';
 import { FaRegClock } from 'react-icons/fa6';
 import { GiTomato } from 'react-icons/gi';
@@ -86,6 +87,7 @@ export default async function RootLayout({
           </div>
         )}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
